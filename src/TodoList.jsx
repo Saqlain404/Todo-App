@@ -41,7 +41,6 @@ const TodoList = () => {
         <button onClick={addItem}>Add</button>
       </div>
       <div className="my-8" style={{ width: "300px" }}>
-        <h2>Todo list: 📝</h2>
         <ol>
           {listItems.map((itemsval, index) => {
             return (
