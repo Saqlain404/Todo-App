@@ -57,6 +57,8 @@
   color: #ffff;
 }
 
+
+
 .todo-form {
   display: flex;
   flex-direction: row;
@@ -102,21 +104,23 @@
   border: solid #75da8b 2px;
 }
 
-/* .edit-form input {
+.edit-form input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
+  /* height: 70px; */
   width: 100%;
   max-width: 455px;
-  border: 1px solid #c2b39a;
   font-size: 16px;
-  background-color: #0d0d0d;
+  background-color: transparent;
   color: #fff;
   padding: 12px;
-} */
-.edit-form{
-
+}
+.edit-form input:focus {
+  outline: none; /* Remove outline on focus */
+  border: none;
+  margin: 0;
+  height: 26px;
 }
 
 .check-btn-fill {
@@ -160,4 +164,13 @@ ol {
    /* Removes the numbering or letters */
   padding-left: 0; /* Optional: Remove the indentation */
   margin-left: 0; /* Optional: Adjust margin */
+}
+
+.minimal-swal-popup {
+  margin-top: 20px;
+  font-weight: 400;
+  margin-right: 10px;
+  font-size: 10px; /* Smaller font */
+  border-radius: 20px; /* Slightly rounded corners */
+  box-shadow: none; /* Remove shadow */
 }

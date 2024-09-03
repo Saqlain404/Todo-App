@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-// import TodoList from "./Components/TodoList";
 import Header from "./Components/Header";
 import TodoHero from "./Components/TodoHero";
 import Form from "./Components/Form";
 import TodoLists from "./Components/TodoLists";
-import { v4 as uuidv4 } from "uuid";
+import Swal from "sweetalert2";
 
 function App() {
   const [todos, setTodos] = useState("");
@@ -22,6 +21,19 @@ function App() {
         return item.id !== id;
       });
     });
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Todo deleted successfully",
+      showConfirmButton: false,
+      timer: 1500,
+      width: "300px",  // Reduced width for a smaller look
+      padding: "0.75rem",  // Minimal padding
+      customClass: {
+        popup: 'minimal-swal-popup',  // Custom class for further styling
+      },
+      backdrop: true,  // No backdrop for a cleaner look
+    });
   };
 
   const editTodo = (id) => {
@@ -30,7 +42,7 @@ function App() {
         return item.id === id;
       })
    )
-   console.log(id)
+   
   }
   
 
@@ -47,7 +59,6 @@ function App() {
             setTodoItems={setTodoItems}
             todoItems={todoItems}
           />
-          {/* <TodoList todos={[]}/> */}
 
           <TodoLists
             className="mt-4"
@@ -64,12 +75,3 @@ function App() {
 
 export default App;
 
-{
-  /* <header>
-<h1>Counter app using State</h1>
-</header>
-<h2>Current value of count is {count}</h2>
-<button onClick={() => setCount(0)}>Reset Counter</button>
-<button onClick={() => (count > 10 ? "" : setCount(count + 1))}>Increase Counter</button>
-<button onClick={() => (count < 1 ? "" : setCount(count - 1))}>Decrease Counter</button> */
-}
