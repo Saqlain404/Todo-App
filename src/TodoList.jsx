@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ListItems from "./Components/ListItems";
-import { useEffect } from "react";
+
 
 const TodoList = () => {
   const [todos, setTodos] = useState("");

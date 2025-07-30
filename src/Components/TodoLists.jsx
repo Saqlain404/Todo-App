@@ -64,7 +64,7 @@ const List = (props) => {
         </form>
       ) : (
         <>
-          <div className="d-flex checkNtext">
+          <div className="flex checkNtext">
             <button
               className={
                 props.list.isComplete ? "check-btn-fill" : "check-btn-border"
@@ -83,7 +83,7 @@ const List = (props) => {
               {props.list.title}
             </p>
           </div>
-          <div>
+          <div className="flex">
             <img
               src="images/edit.png"
               alt=""

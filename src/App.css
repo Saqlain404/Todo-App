@@ -8,6 +8,28 @@
   color: aliceblue;
   background: #2c3335;
 }
+.login-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  color: aliceblue;
+  background: #2c3335;
+}
+.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #064c5f;
+}
+
 
 .home {
   width: 60%;
@@ -133,6 +155,7 @@
 .list-btn {
   width: 24px;
   margin: 0 8px;
+  cursor: pointer;
 }
 .todo-list-text {
   text-align: start;

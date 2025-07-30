@@ -5,10 +5,10 @@ const TodoHero = ({todosCompleted, totalTodos}) => {
     <>
       <div className="hero-section">
         <div className="">
-            <h4>Task Done</h4>
-            <h5>Keep It Up</h5>
+            <h4 className="text-2xl">Task Done</h4>
+            <h5 className="text-xl">Keep It Up</h5>
         </div>
-        <div className="count">
+        <div className="count text-4xl">
             <h1>{todosCompleted}/{totalTodos}</h1>
         </div>
       </div>
