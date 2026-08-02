@@ -1,3 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --bg: #2c3335;
+  --bg-deep: #1e272e;
+  --teal: #064c5f;
+  --teal-light: #0a5f74;
+  --green: #75da8b;
+  --gold: #ffd700;
+  --card: #232b2d;
+  --card-hover: #2a3436;
+  --muted: #9aa7ab;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: #ffffff;
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--green);
+    color: #06252e;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font-family: inherit;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #3a4446;
+    border-radius: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #4a5658;
+  }
+}
+
+.minimal-swal-popup {
+  margin-top: 20px;
+  font-weight: 400;
+  margin-right: 10px;
+  font-size: 10px;
+  border-radius: 20px;
+  box-shadow: none;
+}
