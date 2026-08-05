@@ -51,6 +51,7 @@ const Sidebar = ({
   todos,
   selectedProjectId,
   filter,
+  open,
   onSelectView,
   onSelectProject,
   onAddProject,
@@ -81,7 +82,11 @@ const Sidebar = ({
   };
 
   return (
-    <aside className="w-72 shrink-0 bg-[#1e272e] border-r border-white/10 flex flex-col h-screen sticky top-0">
+    <aside
+      className={`fixed inset-y-0 left-0 z-50 h-full w-72 max-w-[85vw] shrink-0 bg-[#1e272e] border-r border-white/10 flex flex-col transition-transform duration-200 ${
+        open ? "translate-x-0" : "-translate-x-full"
+      } lg:static lg:translate-x-0`}
+    >
       <div className="p-4 border-b border-white/10">
         <div className="flex items-center gap-3">
           <span className="w-11 h-11 rounded-full bg-[#064c5f] text-[#75da8b] font-bold text-lg flex items-center justify-center shrink-0">

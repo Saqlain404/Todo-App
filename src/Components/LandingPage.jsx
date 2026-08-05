@@ -172,7 +172,7 @@ const LandingPage = () => {
                 See Features
               </a>
             </div>
-            <div className="flex items-center gap-8 text-sm">
+            <div className="flex flex-wrap items-center gap-6 sm:gap-8 text-sm">
               <div>
                 <p className="text-2xl font-bold text-[#75da8b]">100%</p>
                 <p className="text-white/50">Free to use</p>

@@ -53,6 +53,14 @@ function App() {
   const [filter, setFilter] = useState(null);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const onChange = (e) => e.matches && setSidebarOpen(false);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     Promise.all([todosApi.getTodos(), projectsApi.getProjects()])
@@ -176,11 +184,13 @@ function App() {
   const selectView = (f) => {
     setFilter(f);
     setSelectedProjectId(null);
+    setSidebarOpen(false);
   };
 
   const selectProject = (id) => {
     setSelectedProjectId(id);
     setFilter(null);
+    setSidebarOpen(false);
   };
 
   const handleLogout = async () => {
@@ -195,22 +205,31 @@ function App() {
       color: "#fff",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        setSidebarOpen(false);
         await authLogout();
         navigate("/");
       }
     });
   };
 
-  // if (loading) return <Loader/>
+  if (loading) return <div className="flex items-center justify-center h-screen bg-[#1e272e] text-white">Loading...</div>;
 
   return (
-    <div className="App flex h-screen overflow-hidden">
+    <div className="App flex h-screen supports-[height:100dvh]:h-dvh overflow-hidden">
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       <Sidebar
         user={user}
         projects={projects}
         todos={todos}
         selectedProjectId={selectedProjectId}
         filter={filter}
+        open={sidebarOpen}
         onSelectView={selectView}
         onSelectProject={selectProject}
         onAddProject={addProject}
@@ -225,6 +244,7 @@ function App() {
           subtitle={viewSubtitle}
           search={search}
           setSearch={setSearch}
+          onToggleSidebar={() => setSidebarOpen(true)}
         />
 
         <main className="flex-1 overflow-y-auto scrollbar-thin">

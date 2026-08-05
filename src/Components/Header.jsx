@@ -1,17 +1,29 @@
 import React from "react";
-import { SearchIcon } from "./Icons";
+import { SearchIcon, MenuIcon } from "./Icons";
 
-const Header = ({ title, subtitle, search, setSearch }) => {
+const Header = ({ title, subtitle, search, setSearch, onToggleSidebar }) => {
   return (
-    <header className="sticky top-0 z-40 h-16 bg-[#2c3335]/95 backdrop-blur-md border-b border-white/10 flex items-center justify-between gap-4 px-6">
-      <div className="min-w-0">
-        <h1 className="text-xl font-bold leading-tight truncate">{title}</h1>
-        {subtitle && (
-          <p className="text-xs text-white/50 truncate">{subtitle}</p>
-        )}
+    <header className="sticky top-0 z-30 h-16 bg-[#2c3335]/95 backdrop-blur-md border-b border-white/10 flex items-center justify-between gap-3 px-4 sm:px-6">
+      <div className="flex items-center gap-3 min-w-0">
+        <button
+          onClick={onToggleSidebar}
+          className="lg:hidden w-10 h-10 shrink-0 -ml-1.5 flex items-center justify-center rounded-xl text-white/70 hover:text-white hover:bg-white/5 transition"
+          title="Menu"
+          aria-label="Open menu"
+        >
+          <MenuIcon className="w-5 h-5" />
+        </button>
+        <div className="min-w-0">
+          <h1 className="text-xl font-bold leading-tight truncate">{title}</h1>
+          {subtitle && (
+            <p className="hidden sm:block text-xs text-white/50 truncate">
+              {subtitle}
+            </p>
+          )}
+        </div>
       </div>
 
-      <div className="relative w-full max-w-xs">
+      <div className="relative w-full max-w-[130px] sm:max-w-xs flex-1 sm:flex-none min-w-0">
         <SearchIcon className="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
         <input
           type="text"

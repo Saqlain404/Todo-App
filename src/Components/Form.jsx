@@ -33,13 +33,13 @@ const Form = ({ onAddTodo, projects, defaultProjectId }) => {
         className="flex-1 px-4 py-3 rounded-xl bg-[#232b2d] border border-white/10 placeholder:text-white/40 text-white focus:outline-none focus:ring-2 focus:ring-[#75da8b]/60 transition"
       />
 
-      <div className="flex items-center gap-3">
-        <div className="relative">
+      <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="relative flex-1 sm:flex-none">
           <FolderIcon className="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <select
             value={projectId}
             onChange={(e) => setProjectId(e.target.value)}
-            className="appearance-none pl-9 pr-8 py-3 rounded-xl bg-[#232b2d] border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#75da8b]/60 transition cursor-pointer"
+            className="appearance-none w-full pl-9 pr-8 py-3 rounded-xl bg-[#232b2d] border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#75da8b]/60 transition cursor-pointer"
           >
             {projects.map((project) => (
               <option key={project.id} value={project.id} className="bg-[#232b2d]">
