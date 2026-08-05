@@ -4,7 +4,7 @@ import { PlusIcon, FolderIcon } from "./Icons";
 
 const Form = ({ onAddTodo, projects, defaultProjectId }) => {
   const [title, setTitle] = useState("");
-  const [projectId, setProjectId] = useState(defaultProjectId || "inbox");
+  const [projectId, setProjectId] = useState(defaultProjectId || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { getUsers, setCurrentUser } from "../utils/storage";
 import { EyeIcon, EyeOffIcon, LogoIcon } from "../Components/Icons";
+import { useAuth } from "../context/AuthContext";
+
+
 
 const inputClass =
   "w-full px-4 py-3 rounded-xl bg-white/10 placeholder-white/50 text-white " +
@@ -14,38 +16,26 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const {login} = useAuth();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const users = getUsers();
-    const found = users.find(
-      (u) =>
-        u.email.toLowerCase() === email.toLowerCase() && u.password === password
-    );
-    if (found) {
-      setCurrentUser(found.email);
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Login successful",
-        showConfirmButton: false,
-        timer: 1500,
-        width: "300px",
-        padding: "0.75rem",
-        customClass: { popup: "minimal-swal-popup" },
-      });
-      navigate("/todo");
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Login Failed",
-        text: "Invalid email or password. Please try again.",
-        confirmButtonColor: "#75da8b",
-        background: "#2F363F",
-        color: "#fff",
-      });
-    }
-  };
+ const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+    await login(email, password);
+    Swal.fire({
+      position: "top", icon: "success", title: "Login successful",
+      showConfirmButton: false, timer: 1500, width: "300px",
+      padding: "0.75rem", customClass: { popup: "minimal-swal-popup" },
+    });
+    navigate("/todo");
+  } catch (error) {
+    Swal.fire({
+      icon: "error", title: "Login Failed", text: error.message,
+      confirmButtonColor: "#75da8b", background: "#2F363F", color: "#fff",
+    });
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#2c3335] via-[#232b2d] to-[#1e272e]">

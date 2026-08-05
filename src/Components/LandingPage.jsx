@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "../utils/storage";
+// import { getCurrentUser } from "../utils/storage";
 import {
   LogoIcon,
   PlusIcon,
@@ -13,6 +13,7 @@ import {
   ListIcon,
   CheckCircleIcon,
 } from "./Icons";
+import {useAuth} from "../context/AuthContext";
 
 const NavLink = ({ href, children }) => (
   <a href={href} className="text-white/70 hover:text-white transition text-sm font-medium">
@@ -95,7 +96,8 @@ const Mockup = () => (
 );
 
 const LandingPage = () => {
-  const user = getCurrentUser();
+  // const user = getCurrentUser();
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-[#2c3335] text-white">

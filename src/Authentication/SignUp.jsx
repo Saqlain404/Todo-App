@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { getUsers, saveUsers } from "../utils/storage";
 import { EyeIcon, EyeOffIcon, LogoIcon } from "../Components/Icons";
+import { useAuth } from "../context/AuthContext";
 
 const inputClass =
   "w-full px-4 py-3 rounded-xl bg-white/10 placeholder-white/50 text-white " +
@@ -17,6 +17,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  const {signup} = useAuth();
 
   const showError = (title, text) => {
     Swal.fire({
@@ -29,39 +30,22 @@ const SignUp = () => {
     });
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      showError("Passwords do not match", "Please re-enter your password.");
+      showError("Passwords don't match", "Please re-enter your password.");
       return;
     }
     if (password.length < 6) {
-      showError("Weak password", "Password must be at least 6 characters long.");
+      showError("Password too short", "Password must be at least 6 characters.");
       return;
     }
-    const users = getUsers();
-    if (users.some((u) => u.email.toLowerCase() === email.toLowerCase())) {
-      showError("Email already registered", "Please log in or use another email.");
-      return;
+    try {
+      await signup(name, email, password); // creates account + sets cookie
+      navigate("/todo");
+    } catch (error) {
+      showError("Signup failed", error.message);
     }
-    users.push({
-      name: name.trim() || email.split("@")[0],
-      email,
-      password,
-      createdAt: new Date().toISOString(),
-    });
-    saveUsers(users);
-    Swal.fire({
-      position: "top",
-      icon: "success",
-      title: "Account created! Please login.",
-      showConfirmButton: false,
-      timer: 1500,
-      width: "320px",
-      padding: "0.75rem",
-      customClass: { popup: "minimal-swal-popup" },
-    });
-    navigate("/login");
   };
 
   const PasswordToggle = ({ show, onClick }) => (

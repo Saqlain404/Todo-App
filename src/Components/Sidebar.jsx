@@ -166,7 +166,7 @@ const Sidebar = ({
           {projects.map((project) => {
             const count = todos.filter((t) => t.projectId === project.id).length;
             const active = selectedProjectId === project.id;
-            const isInbox = project.id === "inbox";
+            const isInbox = !!project.isInbox;
 
             if (editingId === project.id) {
               return (
