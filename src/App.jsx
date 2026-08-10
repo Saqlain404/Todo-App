@@ -22,6 +22,12 @@ const isToday = (iso) => {
   );
 };
 
+const Loader = () => (
+  <div className="min-h-screen bg-[#2c3335] flex items-center justify-center text-white">
+    <p className="text-[#75da8b] font-semibold">Loading…</p>
+  </div>
+);
+
 const showToast = (title) => {
   Swal.fire({
     position: "top-end",
@@ -75,13 +81,11 @@ function App() {
   }, [authLogout]);
 
   useEffect(() => {
-    if (!selectedProjectId && projects.length) {
+    if (!selectedProjectId && !filter && projects.length) {
       const inbox = projects.find((p) => p.isInbox);
       setSelectedProjectId(inbox ? inbox.id : projects[0].id);
     }
-  }, [projects, selectedProjectId]);
-
-  
+  }, [projects, selectedProjectId, filter]);
 
   const scopedTodos = useMemo(() => {
     let list = todos;
@@ -212,8 +216,7 @@ function App() {
     });
   };
 
-  if (loading) return <div className="flex items-center justify-center h-screen bg-[#1e272e] text-white">Loading...</div>;
-
+  if (loading) return <Loader />;
   return (
     <div className="App flex h-screen supports-[height:100dvh]:h-dvh overflow-hidden">
       {sidebarOpen && (
